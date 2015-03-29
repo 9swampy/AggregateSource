@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using KellermanSoftware.CompareNetObjects;
 using NUnit.Framework;
@@ -11,7 +12,7 @@ namespace AggregateSource.Testing.Comparers
         [Test]
         public void IsEventComparer()
         {
-            var sut = new CompareNetObjectsBasedEventComparer(new CompareObjects());
+            var sut = new CompareNetObjectsBasedEventComparer(new CompareLogic());
             Assert.IsInstanceOf<IEventComparer>(sut);
         }
 
@@ -24,7 +25,7 @@ namespace AggregateSource.Testing.Comparers
         [Test]
         public void CompareReturnsExpectedEventWhenObjectsDiffer()
         {
-            var comparer = new CompareObjects();
+            var comparer = new CompareLogic();
             var sut = new CompareNetObjectsBasedEventComparer(comparer);
 
             var expected = new Event { Value = "1" };
@@ -34,14 +35,14 @@ namespace AggregateSource.Testing.Comparers
             Assert.That(result,
                 Is.EquivalentTo(new[]
                 {
-                    new EventComparisonDifference(expected, actual, "Expected..Value != Actual..Value (1,2)")
+                    new EventComparisonDifference(expected, actual, "Types [String,String], Item Expected.Value != Actual.Value, Values (1,2)")
                 }).Using(EventComparisonDifferenceComparer.Instance));
         }
 
         [Test]
         public void CompareReturnsExpectedEventWhenObjectsAreEqual()
         {
-            var comparer = new CompareObjects();
+            var comparer = new CompareLogic();
             var sut = new CompareNetObjectsBasedEventComparer(comparer);
 
             var expected = new Event { Value = "1" };

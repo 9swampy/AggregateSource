@@ -9,14 +9,14 @@ namespace AggregateSource.Testing.Comparers
     /// </summary>
     public class CompareNetObjectsBasedFactComparer : IFactComparer
     {
-        private readonly ICompareObjects _comparer;
+        private readonly ICompareLogic _comparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CompareNetObjectsBasedFactComparer"/> class.
         /// </summary>
         /// <param name="comparer">The comparer.</param>
         /// <exception cref="System.ArgumentNullException">Thrown when the <paramref name="comparer">comparer</paramref> is <c>null</c>.</exception>
-        public CompareNetObjectsBasedFactComparer(ICompareObjects comparer)
+        public CompareNetObjectsBasedFactComparer(ICompareLogic comparer)
         {
             if (comparer == null) throw new ArgumentNullException("comparer");
             _comparer = comparer;
@@ -40,9 +40,9 @@ namespace AggregateSource.Testing.Comparers
                     string.Format("Expected.Identifier != Actual.Identifier ({0},{1})", expected.Identifier, actual.Identifier));
             }
 
-            if (!_comparer.Compare(expected.Event, actual.Event))
+            if (!_comparer.Compare(expected.Event, actual.Event).AreEqual)
             {
-                foreach (var difference in _comparer.Differences)
+                foreach (var difference in _comparer.Compare(expected.Event, actual.Event).Differences)
                 {
                     yield return new FactComparisonDifference(
                         expected,

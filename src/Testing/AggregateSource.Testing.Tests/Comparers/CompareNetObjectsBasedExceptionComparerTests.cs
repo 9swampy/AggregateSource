@@ -17,7 +17,7 @@ namespace AggregateSource.Testing.Comparers
         [Test]
         public void CompareReturnsExpectedExceptionWhenObjectsDiffer()
         {
-            var comparer = new CompareObjects();
+            var comparer = new CompareLogic();
             var sut = new CompareNetObjectsBasedExceptionComparer(comparer);
 
             var expected = new Exception("1");
@@ -27,14 +27,14 @@ namespace AggregateSource.Testing.Comparers
             Assert.That(result,
                 Is.EquivalentTo(new[]
                 {
-                    new ExceptionComparisonDifference(expected, actual, "Expected..Message != Actual..Message (1,2)")
+                    new ExceptionComparisonDifference(expected, actual, "Types [String,String], Item Expected.Message != Actual.Message, Values (1,2)")
                 }).Using(ExceptionComparisonDifferenceComparer.Instance));
         }
 
         [Test]
         public void CompareReturnsExpectedExceptionWhenObjectsAreEqual()
         {
-            var comparer = new CompareObjects();
+            var comparer = new CompareLogic();
             var sut = new CompareNetObjectsBasedExceptionComparer(comparer);
 
             var expected = new Exception("1");
