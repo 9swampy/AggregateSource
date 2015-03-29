@@ -41,7 +41,7 @@ namespace AggregateSource.Testing
 #if NUNIT
                         throw new NUnit.Framework.AssertionException(writer.ToString());
 #elif XUNIT
-                        throw new Xunit.Sdk.AssertException(writer.ToString());
+                        throw new Xunit.Sdk.AssertActualExpectedException(result.Specification.Then, result.ButException.Value, writer.ToString());
 #endif
                     }
                 }
@@ -56,7 +56,7 @@ namespace AggregateSource.Testing
 #if NUNIT
                         throw new NUnit.Framework.AssertionException(writer.ToString());
 #elif XUNIT
-                        throw new Xunit.Sdk.AssertException(writer.ToString());
+                        throw new Xunit.Sdk.AssertActualExpectedException(result.Specification.Then, result.ButResult.Value, writer.ToString());
 #endif
                     }
                 }
@@ -73,7 +73,7 @@ namespace AggregateSource.Testing
 #if NUNIT
                         throw new NUnit.Framework.AssertionException(writer.ToString());
 #elif XUNIT
-                        throw new Xunit.Sdk.AssertException(writer.ToString());
+                        throw new Xunit.Sdk.AssertActualExpectedException(result.Specification.Then, result.ButEvents.Value, writer.ToString());
 #endif
                     }
                 }
@@ -107,7 +107,7 @@ namespace AggregateSource.Testing
 #if NUNIT
                             throw new NUnit.Framework.AssertionException(writer.ToString());
 #elif XUNIT
-                            throw new Xunit.Sdk.AssertException(writer.ToString());
+                            throw new Xunit.Sdk.AssertActualExpectedException(result.Specification.Throws, result.ButException.Value, writer.ToString());
 #endif
                         }
                     }
@@ -123,7 +123,7 @@ namespace AggregateSource.Testing
 #if NUNIT
                         throw new NUnit.Framework.AssertionException(writer.ToString());
 #elif XUNIT
-                        throw new Xunit.Sdk.AssertException(writer.ToString());
+                        throw new Xunit.Sdk.AssertActualExpectedException(result.Specification.Throws, result.ButException.Value, writer.ToString());
 #endif
                     }
                 }
@@ -140,7 +140,7 @@ namespace AggregateSource.Testing
 #if NUNIT
                         throw new NUnit.Framework.AssertionException(writer.ToString());
 #elif XUNIT
-                        throw new Xunit.Sdk.AssertException(writer.ToString());
+                        throw new Xunit.Sdk.AssertActualExpectedException(result.Specification.Throws, result.ButEvents.Value, writer.ToString());
 #endif
                     }
                 }
@@ -155,7 +155,7 @@ namespace AggregateSource.Testing
 #if NUNIT
                         throw new NUnit.Framework.AssertionException(writer.ToString());
 #elif XUNIT
-                        throw new Xunit.Sdk.AssertException(writer.ToString());
+                        throw new Xunit.Sdk.AssertActualExpectedException(result.Specification.Throws, result.ButResult.Value, writer.ToString());
 #endif
                     }
                 }
